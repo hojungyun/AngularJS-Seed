@@ -1,0 +1,1 @@
+angular.module('app.common', []); //<-- create app.common sub module
