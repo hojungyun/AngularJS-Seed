@@ -4,7 +4,7 @@ This is a seed for AngularJS project.
 ### Installation
 
  ```sh
-npm insetall
+npm install
 bower install
 gulp
  ```
