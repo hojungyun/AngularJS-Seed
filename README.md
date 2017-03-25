@@ -1,4 +1,4 @@
-#AngularJS seed for test.
+# AngularJS seed for test.
 This is a seed for AngularJS project.
 
 ### Installation
