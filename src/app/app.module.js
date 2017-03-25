@@ -1,5 +1,20 @@
-var myModule = angular.module('app', [ //<-- 주입 순서는 상관없음. boot.js에서 로드만 순서에 맞게 하면 됨
-    'ngMaterial',
+var myModule = angular.module('app', [
+    'ngAnimate',
+    'ui.router',
+    'cgNotify',
+    'angularUtils.directives.dirPagination',
+    'nvd3',
+    'ngCountUp',
+    'angular.filter',
+    'ngMessages',
+    'mgcrea.ngStrap',
+    'ngBootbox',
+    'checklist-model',
+    'angularMoment',
+    'ion.rangeslider',
+    'dndLists',
+    'ngCookies',
+    'ui.select',
     'app.common'
 ]);
 

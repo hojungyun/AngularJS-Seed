@@ -29,17 +29,56 @@ var srcPath = {
 
     // index.html의 head에서 vendorCss 로드 후 appCss 로드
     vendorCss: [ //<-- 순서에 맞게
-        'bower_components/angular-material/angular-material.css'
+        'bower_components/angular-notify/dist/angular-notify.css',
+        'bower_components/font-awesome/css/font-awesome.css',
+        'bower_components/nvd3/build/nv.d3.css',
+        'bower_components/angular-motion/dist/angular-motion.css',
+        'bower_components/ion.rangeslider/css/ion.rangeSlider.css',
+        'src/assets/css/vendor/bootstrap.css' //<-- bootswatch에서 받은 bootstrap.css
     ],
-    appCss: 'src/assets/css/**/*.css',
+    appCss: [
+        '!src/assets/css/vendor/bootstrap.css', //<-- 제외. vendorCss에 포함됨
+        'src/assets/css/**/*.css'
+    ],
 
     // index.html의 body에서 vendorCss 로드 후 appCss 로드
     vendorJs: [ //<-- 순서에 맞게
+        'bower_components/jquery/dist/jquery.js',
+        'bower_components/bootstrap/dist/js/bootstrap.js',
         'bower_components/angular/angular.js',
+        'bower_components/angular-cookies/angular-cookies.js',
         'bower_components/angular-animate/angular-animate.js',
-        'bower_components/angular-aria/angular-aria.js',
+        'bower_components/angular-ui-router/release/angular-ui-router.js',
+        'bower_components/angular-notify/dist/angular-notify.js',
+        'bower_components/angularUtils-pagination/dirPagination.js',
+        'bower_components/angular-filter/dist/angular-filter.js',
         'bower_components/angular-messages/angular-messages.js',
-        'bower_components/angular-material/angular-material.js'
+        'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
+        'bower_components/bootbox/bootbox.js',
+        'bower_components/ngBootbox/dist/ngBootbox.js',
+        'bower_components/checklist-model/checklist-model.js',
+        'bower_components/angular-ui-select/dist/select.js',
+
+        // strap
+        'bower_components/angular-strap/dist/angular-strap.js',
+        'bower_components/angular-strap/dist/angular-strap.tpl.js',
+
+        // d3
+        'bower_components/d3/d3.js',
+        'bower_components/nvd3/build/nv.d3.js',
+        'bower_components/angular-nvd3/dist/angular-nvd3.js',
+
+        // count up
+        'bower_components/countUp.js/countUp.js',
+        'bower_components/ng-countUp.js/ngCountUp.min.js',
+
+        // moment
+        'bower_components/moment/moment.js',
+        'bower_components/angular-moment/angular-moment.js',
+
+        // slider
+        'bower_components/ion.rangeslider/js/ion.rangeSlider.js',
+        'bower_components/ion-range-slider-angularjs/ionic-range-slider.js'
     ],
     appJs: [ //<-- 순서에 맞게
         'src/assets/js/**/*.js', //<-- 먼저 로드
@@ -66,7 +105,7 @@ gulp.task('minify_vendor_css', function() {
     return gulp.src(srcPath.vendorCss)
         .pipe(plumber())
         .pipe(concatCSS(buildPath.vendorCss))
-        .pipe(minifyCSS())
+        // .pipe(minifyCSS()) //<-- PRODUCTION
         .pipe(gulp.dest(buildPath.base));
 });
 
@@ -83,7 +122,7 @@ gulp.task('minify_vendor_js', function(){
         .pipe(plumber())
         .pipe(concat(buildPath.vendorJs))
         .pipe(ngAnnotate())
-        .pipe(uglify({mangle: true, exportAll: true}))
+        // .pipe(uglify({mangle: true, exportAll: true})) //<-- PRODUCTION
         .pipe(gulp.dest(buildPath.base))
         .on('error', gutil.log);
 });
@@ -93,7 +132,7 @@ gulp.task('minify_app_js', function() {
         .pipe(plumber())
         .pipe(concat(buildPath.appJs))
         .pipe(ngAnnotate())
-        .pipe(uglify({mangle: true})) //<-- PRODUCTION 에서 사용
+        // .pipe(uglify({mangle: true})) //<-- PRODUCTION 에서 사용
         .pipe(gulp.dest(buildPath.base))
         .on('error', gutil.log);
 });
