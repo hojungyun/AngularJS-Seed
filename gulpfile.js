@@ -82,9 +82,22 @@ var srcPath = {
     ],
     appJs: [ //<-- 순서에 맞게
         'src/assets/js/**/*.js', //<-- 먼저 로드
-        "src/app/modules/common/app.common.module.js", //<-- module js가 component 보다 먼저 와야 함
-        "src/app/modules/common/controllers/common.controller.js",
-        "src/app/app.module.js" //<-- 맨앞이나 맨뒤 모두 가능
+        
+        // common: sub module 먼저 로드. 그 다음 service -> controller 순..
+        'src/app/modules/common/app.common.module.js', //<-- module js가 component 보다 먼저 와야 함
+        'src/app/modules/common/controllers/common.controller.js',
+
+        // home
+        'src/app/modules/home/app.home.module.js',
+        'src/app/modules/home/controllers/home.controller.js',
+
+        // about
+        'src/app/modules/about/app.about.module.js',
+        'src/app/modules/about/controllers/about.controller.js',
+
+        // main module 로드
+        'src/app/app.module.js', //<-- 맨앞이나 맨뒤 모두 가능
+        'src/app/app.config.js'
     ]
 };
 
@@ -172,7 +185,7 @@ gulp.task('server', ['watch'], function () { //<-- 의존성 'watch' 추가
             livereload: true
         }))
         .pipe(open({ //<-- 브라우저 오픈
-            uri: "http://localhost:8000/index.html",
+            uri: "http://localhost:8000",
             app: 'Google Chrome'
         }));
 });
